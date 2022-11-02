@@ -1,0 +1,52 @@
+<div class="navbar">
+  <a class="navbar-brand">SPORTS STORE</a>
+</div>
+<div class="row">
+  <div class="col-3 bg-info p-a-1">
+    {{categories.length}} Categories
+  </div>
+  <div class="col-9 bg-success p-a-1">
+    {{products.length}} Products
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-3 p-1">
+    <button class="btn btn-block btn-outline-primary" (click)="changeCategory()">
+      Home
+    </button>
+    <button *ngFor="let cat of categories" [class.active]="cat===selectedCategory" (click)="changeCategory(cat)" class="btn btn-outline-primary btn-block">
+      {{cat}}
+    </button>
+  </div>
+  <div class="col-9 p-1">
+    <div *ngFor="let product of products" class="card">
+      <h4 class="card-header">
+        {{product.name}}
+        <span class="pull-xs-right tag tag-pill tag-primary">
+          {{ product.price | currency:"USD":true:"2.2-2" }}
+        </span>
+      </h4>
+      <div class="card-text">{{product.description}}</div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="offset-3 col-4 ml-auto form-inline pull-lest m-1">
+    <select class="form-control" #pageSelector [value]="productsPerPage" (change)="changePageSize(+pageSelector.value)">
+      <option value="3">3 per Page</option>
+      <option value="4">3 per Page</option>
+      <option value="6">6 per Page</option>
+      <option value="8">8 per Page</option>
+    </select>
+  </div>
+
+  <div class="col-5 btn-group d-flex justify-content-end pull-right">
+    <button *counter="let page of pageCount" (click)="changePage(page)" class="btn btn-outline-primary" [class.active]="page === selectedPage">
+      {{page}}
+    </button>
+  </div>
+</div>
+
+
